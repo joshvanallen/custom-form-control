@@ -3,7 +3,7 @@ import { NG_VALUE_ACCESSOR, NG_VALIDATORS, NgControl, ControlValueAccessor, Vali
 
 @Component({
   selector: 'jva-custom-form-control',
-  templateUrl: './custom-form-control.component.html',
+  template: `<input type="text" (change)="valueChanges($event.target.value)"/>`,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
