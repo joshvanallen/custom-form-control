@@ -23,6 +23,7 @@ export class JVACustomFormControlComponent implements ControlValueAccessor, Vali
     private onChange;
     private onTouched;
     private validatorOnChange;
+    public disabled = true;
 
     public writeValue(obj: any): void {
         this.value = obj ? obj : null;
