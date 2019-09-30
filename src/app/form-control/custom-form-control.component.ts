@@ -1,9 +1,9 @@
-import { Component, ChangeDetectionStrategy, forwardRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, forwardRef, ElementRef, Renderer2, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, NgControl, ControlValueAccessor, Validator, AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'jva-custom-form-control',
-  template: `<input type="text" (change)="valueChanges($event.target.value)"/>`,
+  templateUrl: './custom-form-control.component.html',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -23,7 +23,10 @@ export class JVACustomFormControlComponent implements ControlValueAccessor, Vali
     private onChange;
     private onTouched;
     private validatorOnChange;
-    public disabled = true;
+    public disabled;
+
+    constructor(private elementRef:ElementRef, private renderer:Renderer2, private cdr:ChangeDetectorRef){}
+
 
     public writeValue(obj: any): void {
         this.value = obj ? obj : null;
@@ -39,6 +42,18 @@ export class JVACustomFormControlComponent implements ControlValueAccessor, Vali
     public registerOnValidatorChange(fn: ()=>void):void{
       console.log('register: validator')
       this.validatorOnChange = fn;
+    }
+
+        public setDisabledState(isDisabled) {
+        console.log('hi');
+        console.log(isDisabled);
+        this.disabled = isDisabled;
+        if(isDisabled){
+        this.renderer.setAttribute(this.elementRef.nativeElement, 'disabled', isDisabled);
+        }else{
+          this.renderer.removeAttribute(this.elementRef.nativeElement, 'disabled');
+        }
+        this.cdr.detectChanges();
     }
 
     public validate(control: AbstractControl):ValidationErrors{
