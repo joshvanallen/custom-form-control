@@ -3,6 +3,6 @@
   Start editing to see some magic happen :)
 </p>
 
-<jva-custom-form-control [(ngModel)]="name" [disabled]="true" #myFormControl="ngModel"></jva-custom-form-control>
+<jva-custom-form-control [(ngModel)]="name" #myFormControl="ngModel"></jva-custom-form-control>
 
 <p *ngIf="myFormControl.errors && myFormControl.errors.parse">Invalid parse</p>
