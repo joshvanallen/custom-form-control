@@ -45,11 +45,9 @@ export class JVACustomFormControlComponent implements ControlValueAccessor, Vali
     }
 
         public setDisabledState(isDisabled) {
-        console.log('hi');
-        console.log(isDisabled);
         this.disabled = isDisabled;
         if(isDisabled){
-        this.renderer.setAttribute(this.elementRef.nativeElement, 'disabled', isDisabled);
+        this.renderer.setAttribute(this.elementRef.nativeElement, 'disabled', '');
         }else{
           this.renderer.removeAttribute(this.elementRef.nativeElement, 'disabled');
         }
